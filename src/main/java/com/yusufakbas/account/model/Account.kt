@@ -10,18 +10,29 @@ data class Account(
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    val id: String?,
-    val balance: BigDecimal? = BigDecimal.ZERO,
-    val creationDate: LocalDateTime?,
+    var id: String? = null,
+
+    var balance: BigDecimal? = BigDecimal.ZERO,
+
+    @Column(nullable = false)
+    var creationDate: LocalDateTime? = null,
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     @JoinColumn(name = "customer_id", nullable = false)
-    val customer: Customer?,
+    var customer: Customer? = null,
 
-    @OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
-    val transactions: Set<Transaction>?
-
+    @OneToMany(mappedBy = "account", fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
+    var transactions: Set<Transaction> = HashSet()
 ) {
+    // Parametresiz default constructor
+    constructor() : this("", BigDecimal.ZERO, null, null, HashSet())
+
+    constructor(customer: Customer, balance: BigDecimal, creationDate: LocalDateTime) : this(
+        id = "",
+        balance = balance,
+        creationDate = creationDate,
+        customer = customer
+    )
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -45,5 +56,4 @@ data class Account(
         result = 31 * result + (customer?.hashCode() ?: 0)
         return result
     }
-
 }

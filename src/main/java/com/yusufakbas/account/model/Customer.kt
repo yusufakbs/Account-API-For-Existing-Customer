@@ -5,19 +5,21 @@ import org.hibernate.annotations.GenericGenerator
 
 @Entity
 data class Customer(
-    @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    val id: String?,
+    @Id @GeneratedValue(generator = "UUID") @GenericGenerator(
+        name = "UUID", strategy = "org.hibernate.id.UUIDGenerator"
+    ) val id: String? = null,
 
-    val name: String?,
-    val surname: String?,
+    val name: String? = null, val surname: String? = null,
 
-    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
-    val accounts: Set<Account>?
-
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY) val accounts: Set<Account>? = null
 ) {
+    // Parametresiz constructor
+    constructor() : this(null, null, null, null)
 
+    // Diğer constructor
+    constructor(name: String, surname: String) : this(null, name, surname, HashSet())
+
+    // Equals ve hashCode metodları
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
@@ -38,5 +40,4 @@ data class Customer(
         result = 31 * result + (surname?.hashCode() ?: 0)
         return result
     }
-
 }
