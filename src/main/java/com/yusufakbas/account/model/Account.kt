@@ -15,7 +15,7 @@ data class Account(
     var balance: BigDecimal? = BigDecimal.ZERO,
 
     @Column(nullable = false)
-    var creationDate: LocalDateTime? = null,
+    var creationDate: LocalDateTime?,
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     @JoinColumn(name = "customer_id", nullable = false)
@@ -29,9 +29,9 @@ data class Account(
 
     constructor(customer: Customer, balance: BigDecimal, creationDate: LocalDateTime) : this(
         id = "",
+        customer = customer,
         balance = balance,
         creationDate = creationDate,
-        customer = customer
     )
 
     override fun equals(other: Any?): Boolean {

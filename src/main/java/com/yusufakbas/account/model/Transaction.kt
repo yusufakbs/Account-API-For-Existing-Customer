@@ -24,10 +24,10 @@ data class Transaction(
     // Parametresiz default constructor
     constructor() : this(null, TransactionType.INITIAL, null, null, null)
 
-    constructor(amount: BigDecimal, account: Account) : this(
+    constructor(amount: BigDecimal, transactionDate: LocalDateTime, account: Account) : this(
         id = null,
         amount = amount,
-        transactionDate = LocalDateTime.now(),
+        transactionDate = transactionDate,
         transactionType = TransactionType.INITIAL,
         account = account
     )

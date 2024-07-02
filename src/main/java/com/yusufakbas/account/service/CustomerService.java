@@ -1,7 +1,7 @@
 package com.yusufakbas.account.service;
 
 import com.yusufakbas.account.dto.CustomerDto;
-import com.yusufakbas.account.dto.CustomerDtoConverter;
+import com.yusufakbas.account.dto.converter.CustomerDtoConverter;
 import com.yusufakbas.account.exception.CustomerNotFoundException;
 import com.yusufakbas.account.model.Customer;
 import com.yusufakbas.account.repository.CustomerRepository;

@@ -11,13 +11,11 @@ data class Customer(
 
     val name: String? = null, val surname: String? = null,
 
-    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY) val accounts: Set<Account>? = null
+    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER) val accounts: Set<Account>? = null
 ) {
-    // Parametresiz constructor
-    constructor() : this(null, null, null, null)
 
     // Diğer constructor
-    constructor(name: String, surname: String) : this(null, name, surname, HashSet())
+    constructor(name: String, surname: String) : this("", name, surname, HashSet())
 
     // Equals ve hashCode metodları
     override fun equals(other: Any?): Boolean {

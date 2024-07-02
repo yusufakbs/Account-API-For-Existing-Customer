@@ -1,5 +1,7 @@
-package com.yusufakbas.account.dto;
+package com.yusufakbas.account.dto.converter;
 
+import com.yusufakbas.account.dto.AccountCustomerDto;
+import com.yusufakbas.account.dto.CustomerDto;
 import com.yusufakbas.account.model.Customer;
 import org.springframework.stereotype.Component;
 
